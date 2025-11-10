@@ -9,9 +9,10 @@ from io import StringIO
 
 
 # LLM and key loading function
-def load_LLM(openai_api_key):
+def load_LLM():
     # Make sure your openai_api_key is set as an environment variable
-    llm = OpenAI(temperature=0, openai_api_key=openai_api_key)
+    openai.api_key=api_key_input
+    llm = OpenAI(model="gpt-3.5-turbo")
     return llm
 
 
@@ -33,8 +34,8 @@ st.markdown("## Enter Your OpenAI API Key")
 
 
 def get_openai_api_key():
-    input_text = st.text_input(label="OpenAI API Key ", placeholder="Ex: sk-2twmA8tfCb8un4...",
-                               key="openai_api_key_input", type="password")
+    input_text = st.text_input(label="OpenAI API Key ", type="password")
+    st.header(input_text[0:15])
     return input_text
 
 
