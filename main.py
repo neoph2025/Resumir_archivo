@@ -87,7 +87,7 @@ if uploaded_file is not None:
 
     splitted_documents = text_splitter.create_documents([file_input])
 
-    llm = load_LLM(api_key_input)
+    llm = load_LLM(api_key=api_key_input)
 
     summarize_chain = load_summarize_chain(
         llm=llm,
