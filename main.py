@@ -12,7 +12,7 @@ from io import StringIO
 def load_LLM(api_key):
     # Make sure your openai_api_key is set as an environment variable
 
-    llm = OpenAI(model="gpt-3.5-turbo", api_key=api_key)
+    llm = OpenAI(model="gpt-3.5-turbo", api_key=api_key_input)
     return llm
 
 
