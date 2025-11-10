@@ -9,10 +9,10 @@ from io import StringIO
 
 
 # LLM and key loading function
-def load_LLM():
+def load_LLM(api_key):
     # Make sure your openai_api_key is set as an environment variable
-    openai.api_key=api_key_input
-    llm = OpenAI(model="gpt-3.5-turbo")
+
+    llm = OpenAI(model="gpt-3.5-turbo", api_key=api_key)
     return llm
 
 
@@ -86,8 +86,8 @@ if uploaded_file is not None:
     )
 
     splitted_documents = text_splitter.create_documents([file_input])
-    openai.api_key=api_key_input
-    llm = load_LLM()
+
+    llm = load_LLM(api_key_input)
 
     summarize_chain = load_summarize_chain(
         llm=llm,
