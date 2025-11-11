@@ -9,10 +9,10 @@ from io import StringIO
 
 
 # LLM and key loading function
-def load_LLM(api_key_us):
+def load_LLM():
     # Make sure your openai_api_key is set as an environment variable
 
-    llm = OpenAI(model="gpt-3.5-turbo", api_key=api_key_us)
+    llm = OpenAI(model="gpt-3.5-turbo")
     return llm
 
 
@@ -39,7 +39,7 @@ def get_openai_api_key():
     return input_text
 
 
-api_key_input = get_openai_api_key()
+openai_api_key = get_openai_api_key()
 
 # Input
 st.markdown("## Upload the text file you want to summarize")
@@ -73,7 +73,7 @@ if uploaded_file is not None:
         st.stop()
 
     if file_input:
-        if not api_key_input:
+        if not openai_api_key:
             st.warning('Please insert OpenAI API Key. \
             Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)',
                        icon="⚠️")
@@ -87,7 +87,7 @@ if uploaded_file is not None:
 
     splitted_documents = text_splitter.create_documents([file_input])
 
-    llm = load_LLM(api_key=api_key_input)
+    llm = load_LLM()
 
     summarize_chain = load_summarize_chain(
         llm=llm,
