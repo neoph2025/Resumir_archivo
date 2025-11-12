@@ -29,17 +29,7 @@ with col1:
 with col2:
     st.write("Contact with [AI Accelera](https://aiaccelera.com) to build your AI Projects")
 
-# Input OpenAI API Key
-st.markdown("## Enter Your OpenAI API Key")
-
-
-def get_openai_api_key():
-    input_text = st.text_input(label="OpenAI API Key ", key="chatbot_api_key", type="password")
-    st.header(input_text[0:15])
-    return input_text
-
-
-openai_api_key = get_openai_api_key()
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # Input
 st.markdown("## Upload the text file you want to summarize")
@@ -87,7 +77,7 @@ if uploaded_file is not None:
 
     splitted_documents = text_splitter.create_documents([file_input])
 
-    llm = load_LLM()
+    llm = load_LLM(api_key=openai_api_key)
 
     summarize_chain = load_summarize_chain(
         llm=llm,
