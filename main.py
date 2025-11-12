@@ -91,7 +91,7 @@ if uploaded_file is not None:
     message = "Answer this question using the provided context only and in spanish."
 
     prompt_espanol = ChatPromptTemplate.from_messages([("human", message)])
-    llm = load_LLM(openai_api_key=openai_api_key, prompt=prompt_espanol)
+    llm = load_LLM(openai_api_key=openai_api_key)
 
     summarize_chain = load_summarize_chain(
         llm=llm, 
