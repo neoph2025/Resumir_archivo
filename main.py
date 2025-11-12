@@ -88,13 +88,13 @@ if uploaded_file is not None:
 
     splitted_documents = text_splitter.create_documents([file_input])
 
-    message = "Answer this question using the provided context only and in spanish."
+    message = "Answer this question using the provided context only, and answer in spanish."
 
-    prompt_espanol = ChatPromptTemplate.from_messages([("human", message)])
+    prompt_espanol = ChatPromptTemplate.from_messages([("system", message)])
     
     llm = load_LLM(openai_api_key=openai_api_key)
     
-    llm_esp =prompt | llm
+    llm_esp =prompt_esp | llm
     
     summarize_chain_esp = load_summarize_chain(
         llm=llm_esp, 
