@@ -97,7 +97,8 @@ if uploaded_file is not None:
         llm=llm, 
         chain_type="map_reduce"
         )
+    summariza_chain_espanol=RunnablePassthrough(prompt_espanol) | summarize_chain
 
-    summary_output = summarize_chain.run(splitted_documents)
+    summary_output = summarize_chain_espanol.run(splitted_documents)
 
     st.write(summary_output)
