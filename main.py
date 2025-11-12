@@ -5,6 +5,9 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import pandas as pd
 from io import StringIO
+# Metemos un promt para que de la respuesta en espanol
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
 
 #LLM and key loading function
 def load_LLM(openai_api_key):
@@ -85,7 +88,10 @@ if uploaded_file is not None:
 
     splitted_documents = text_splitter.create_documents([file_input])
 
-    llm = load_LLM(openai_api_key=openai_api_key)
+    message = "Answer this question using the provided context only and in spanish."
+
+    prompt_espanol = ChatPromptTemplate.from_messages([("human", message)])
+    llm = load_LLM(openai_api_key=openai_api_key, prompt=prompt_espanol)
 
     summarize_chain = load_summarize_chain(
         llm=llm, 
