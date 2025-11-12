@@ -94,11 +94,10 @@ if uploaded_file is not None:
     
     llm = load_LLM(openai_api_key=openai_api_key)
     
-    llm_esp =prompt_esp | llm
-    
     summarize_chain_esp = load_summarize_chain(
-        llm=llm_esp, 
-        chain_type="map_reduce"
+        llm=llm, 
+        chain_type="map_reduce",
+        collapse_prompt=prompt_esp
         )
 
     summary_output = summarize_chain_esp.run(splitted_documents)
